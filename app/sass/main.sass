@@ -1,0 +1,621 @@
+@import "./slick.scss"
+@import "./_magnific.scss"
+@import "./_fonts.sass"
+@import "./_mixins.sass"
+@import "./_variables.sass"
+@import "./_colors.sass"
+/* IMPORTS ====================================================*/
+
+*
+	box-sizing: border-box
+	margin: 0
+	padding: 0
+	-webkit-tap-highlight-color: transparent
+	font-weight: 400
+
+input,textarea
+	border-radius: 0
+
+body
+	margin: 0
+	padding: 0
+	font-size: 14px
+	font-family: $ws
+	&.ovh
+		overflow: hidden
+
+.content_wrapper
+	max-width: 585px
+	margin: 0 auto
+	
+.title
+	font-weight: 500
+	font-size: 20px
+	line-height: 24px
+	color: $black
+	&.large
+		font-size: 24px
+		line-height: 24px
+		text-transform: uppercase
+	&.small
+		color: $small
+		font-size: 12px
+		line-height: 20px
+		text-transform: uppercase
+		font-weight: 400
+.text
+	font-weight: 300
+	font-size: 14px
+	line-height: 24px
+	color: $dark
+	&.large
+		font-weight: 400
+		font-size: 16px
+		text-transform: uppercase
+	&.description
+		font-size: 16px
+		line-height: 20px
+		font-weight: 400
+
+.modal
+	position: fixed
+	width: 100%
+	height: 100vh
+	z-index: 999
+	top: 0
+	left: 0
+	display: flex
+	justify-content: center
+	align-items: center
+	visibility: hidden
+	&.active
+		visibility: visible
+		.close_overlay
+			opacity: 1
+		.modal_body
+			opacity: 1
+			transform: translate3d(0,0,0)
+	.close_overlay
+		position: absolute
+		z-index: 0
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		background: rgba(255,255,255,0.8)
+		opacity: 0
+		transition: .5s ease
+	.modal_body
+		position: relative
+		z-index: 1
+		display: flex
+		justify-content: center
+		align-items: flex-start
+		box-shadow: 0px 0px 5px 1px rgba(17,20,48,0.11)
+		opacity: 0
+		transform: translate3d(0,50px,0)
+		transition: 1s ease
+		.cancel_button
+			width: 16px
+			height: 16px
+			top: 20px
+			right: 20px
+			position: absolute
+			background: url('../img/icons/cancel.svg') no-repeat center center / 16px
+			cursor: pointer
+			+rmin(1200)
+				transition: .3s ease
+				&:hover
+					background: url('../img/icons/cancel_yellow.svg') no-repeat center center / 16px
+		.image
+			width: 370px
+			height: 510px
+			background: url('../img/popup_bg.jpg') no-repeat center center / cover
+		.form_wrapper
+			background: white
+			padding: 70px
+			height: 510px
+			form
+				width: 260px
+				.form_title
+					font-size: 24px
+					line-height: 24px
+					color: $black
+					font-weight: 500
+					margin-bottom: 50px
+				input
+					width: 100%
+					padding: 5px 0
+					border: none
+					border-bottom: 1px solid #aeaeae
+					margin-bottom: 25px
+					&:focus
+						outline: none
+						&::placeholder
+							opacity: 0
+					&::placeholder
+						font-size: 12px
+						text-transform: uppercase
+						transition: .3s ease
+						font-weight: 500
+				textarea
+					width: 100%
+					resize: none
+					padding: 5px 0
+					border: none
+					border-bottom: 1px solid #aeaeae
+					&:focus
+						outline: none
+						&::placeholder
+							opacity: 0
+					&::placeholder
+						font-size: 12px
+						text-transform: uppercase
+						transition: .3s ease
+						font-weight: 500
+				button
+					cursor: pointer
+					margin-top: 35px
+					width: 138px
+					height: 39px
+					border: 1px solid $yellow
+					background: $yellow
+					font-size: 16px
+					text-transform: uppercase
+					color: $dark
+					border-radius: 30px
+					&:focus
+						outline: none
+					+rmin(1200)
+						transition: .3s ease
+						&:hover
+							background: transparent
+
+header
+	height: 98px
+	width: 100%
+	position: relative
+	z-index: 2
+	display: flex
+	align-items: center
+	padding: 0 50px
+	nav
+		width: 100%
+		display: flex
+		justify-content: space-between
+		align-items: center
+		.logo
+			position: relative
+			z-index: 1
+			.icon
+				display: block
+				width: 83px
+				height: 32px
+				background-size: 100%
+				background-position: center center
+				background-repeat: no-repeat
+				background-image: url('../img/logo.svg')
+		.menu
+			width: 680px
+			display: flex
+			align-items: center
+			ul
+				width: 100%
+				display: flex
+				justify-content: space-around
+				align-items: center
+				li
+					list-style: none
+					position: relative
+					height: 98px
+					display: flex
+					justify-content: center
+					align-items: center
+					+rmin(1200)
+							&:hover
+								ul
+									visibility: visible
+									opacity: 1
+					&.drop
+						&>a
+							position: relative
+							&:after
+								@include pseudo
+								width: 7px
+								height: 7px
+								top: calc(50% - 3.5px)
+								right: -10px
+								background: url('../img/icons/caret.svg') no-repeat center center / 7px					
+					a
+						font-size: 14px
+						line-height: 24px
+						color: $menu
+						text-transform: uppercase
+						text-decoration: none
+						+rmin(1200)
+							transition: .3s ease
+							&:hover
+								color: $yellow
+					ul
+						position: absolute
+						width: 130px
+						background: white
+						left: calc(50% - 65px)
+						top: 97px
+						flex-wrap: wrap
+						justify-content: flex-start
+						padding: 19px 24px
+						border-top: 1px solid $yellow
+						visibility: hidden
+						opacity: 0
+						transition: .3s ease
+						li
+							margin-bottom: 20px
+							height: auto
+							&:last-child
+								margin-bottom: 0
+			.search_trigger
+				width: 62px
+				height: 30px
+				border-left: 1px solid #e8e8e8
+				display: flex
+				justify-content: flex-end
+				align-items: center
+				position: relative
+				z-index: 4
+				transition: .3s ease
+				&.active
+					border-left: 1px solid transparent
+				.icon
+					width: 20px
+					height: 20px
+					background-image: url('../img/icons/search.svg')
+					background-position: center center
+					background-size: 20px
+					background-repeat: no-repeat
+					cursor: pointer
+					transition: .3s ease
+					&.active
+						background-image: url('../img/icons/cancel.svg')
+						+rmin(1200)
+							&:hover
+								background-image: url('../img/icons/cancel_yellow.svg')
+					+rmin(1200)
+						transition: .3s ease
+						&:hover
+							background-image: url('../img/icons/search_yellow.svg')
+			.search_form
+				position: absolute
+				width: 100%
+				height: 100vh
+				top: 0
+				left: 0
+				z-index: 3
+				background: white
+				display: flex
+				justify-content: center
+				align-items: center
+				opacity: 0
+				visibility: hidden				
+				transition: .3s ease
+				&.active
+					opacity: 1
+					visibility: visible
+					form
+						opacity: 1
+						transform: translate3d(0,0,0)
+				form
+					max-width: 1080px
+					width: 100%
+					position: relative
+					opacity: 0
+					transform: translate3d(0,40px,0)
+					transition: 1s ease
+					input[type="submit"]	
+						width: 20px
+						height: 20px
+						position: absolute
+						top: calc(50% - 10px)
+						border: none
+						background-color: transparent
+						background-image: url('../img/icons/search.svg')
+						background-size: 20px
+						background-position: center center
+						background-repeat: no-repeat
+						cursor: pointer
+						+rmin(1200)
+							transition: .3s ease
+							&:hover
+								background-image: url('../img/icons/search_yellow.svg')
+						&:focus
+							outline: none
+					input[type="text"]
+						transform: translate3d(30px,0,0)
+						height: 100%
+						font-size: 36px
+						line-height: 36px
+						padding: 10px
+						color: $black
+						font-weight: 300
+						border: none
+						border-bottom: 1px solid transparent
+						width: 100%
+						transition: .7s ease
+						&:focus
+							outline: none							
+							border-bottom: 1px solid #c2c2c2
+							&::placeholder
+								opacity: 0
+						&::placeholder
+							font-size: 36px
+							line-height: 36px
+							font-weight: 300
+							color: #c2c2c2
+							transition: .7s ease
+							letter-spacing: 1px
+.content_wrapper
+	position: relative
+	z-index: 1
+.main_slider
+	width: 100%
+	position: relative
+	&:before
+		@include pseudo
+		width: 100%
+		height: 100%
+		top: 0
+		left: 0
+		background: #00294e
+		opacity: 0.9
+		z-index: 0
+	.slide
+		position: relative
+		z-index: 1
+		height: 370px
+		width: 100%
+		.image
+			background-position: center center
+			background-repeat: no-repeat
+			background-size: cover
+			opacity: 0.9
+			position: absolute
+			top: 0
+			left: 0
+			width: 100%
+			height: 100%
+			z-index: 0
+		.info_block
+			position: relative
+			z-index: 1
+			display: flex
+			flex-direction: column
+			justify-content: center
+			align-items: center
+			height: 100%
+			.small_text
+				font-size: 16px
+				line-height: 24px
+				text-transform: uppercase
+				font-weight: 500
+				color: white
+			.large_text
+				font-size: 72px
+				color: white
+				text-transform: uppercase
+				font-weight: 500
+section.info
+	.text
+		p
+			margin: 40px 0
+section.geography
+	.text
+		p
+			margin: 20px 0
+	.quote
+		display: flex
+		flex-wrap: wrap
+		justify-content: flex-end
+		padding: 50px 0
+		margin: 50px 0
+		border-top: 1px solid #dddddd
+		border-bottom: 1px solid #dddddd
+		.icon
+			font-family: $lbr
+			font-size: 80px
+			color: $yellow
+			line-height: 1
+		.quote_text
+			font-family: $lbi
+			max-width: 495px
+			margin-left: auto	
+			color: $dark
+			font-size: 16px
+			line-height: 30px
+		.who
+			font-size: 14px
+			line-height: 24px
+			font-weight: 400
+			color: $light
+			position: relative
+			&:before
+				@include pseudo
+				width: 40px
+				height: 1px
+				top: calc(50% - 0.5px)
+				left: -60px
+				background: $light
+section.list
+	.text
+		p
+			margin: 20px 0
+	table
+		width: 100%
+		border: 1px solid #f0f0f0
+		margin: 40px 0
+		tr
+			th
+				padding: 17px
+				color: $light
+				font-size: 12px
+				text-align: left
+				border-bottom: 1px solid #f0f0f0
+				font-weight: 400
+			td
+				padding: 17px
+				font-size: 14px
+				color: $dark
+				text-align: left
+				font-weight: 400
+section.lastest_posts
+	padding: 70px 0
+	margin-top: 70px
+	border-top: 1px solid #f1f1f5
+	.title
+		text-align: center
+	.posts_grid
+		max-width: 1200px
+		margin: 50px auto
+		display: flex
+		justify-content: space-around
+		align-items: center
+		.item
+			display: flex
+			box-shadow: 0px 0px 5px 1px rgba(17,20,48,0.11)
+			.thumbnail
+				background-size: cover
+				background-position: center center
+				background-repeat: no-repeat
+				width: 185px
+				height: 185px
+				display: block
+				position: relative
+				+rmin(1200)
+					&:hover
+						&:before
+							opacity: 1
+						&:after
+							opacity: 1
+				&:before
+					@include pseudo
+					width: 100%
+					height: 100%
+					top: 0
+					left: 0
+					background: rgba(0,0,0,0.5)
+					z-index: 0
+					opacity: 0
+					transition: .3s ease
+				&:after
+					@include pseudo
+					width: 100%
+					height: 100%
+					top: 0
+					left: 0
+					background: url('../img/icons/link.svg') no-repeat center center / 30px
+					z-index: 1
+					opacity: 0
+					transition: .3s ease
+			.item_info
+				width: 185px
+				height: 185px
+				padding: 15px
+				display: flex
+				flex-direction: column
+				justify-content: space-around
+				align-items: flex-start
+				.cat
+					font-size: 12px
+					line-height: 20px
+					color: $small
+					text-transform: uppercase
+				.min_desc
+					font-size: 16px
+					line-height: 20px
+					font-weight: 400
+					color: $black
+				.link
+					font-size: 12px
+					line-height: 10px
+					text-transform: uppercase
+					color: $black
+					text-decoration: none
+					position: relative
+					+rmin(1200)
+						&:hover
+							&:after
+								transform: translate3d(5px,0,0)
+					&:after
+						@include pseudo
+						width: 10px
+						height: 10px
+						right: -15px
+						top: calc(50% - 5px)
+						transition: .3s ease
+						background: url('../img/icons/arrow.svg')
+						background-size: 10px
+						background-position: center center
+						background-repeat: no-repeat
+
+footer
+	padding: 55px
+	padding-bottom: 25px
+	border-top: 1px solid #f1f1f5
+	.footer_nav
+		display: flex
+		justify-content: space-between
+		align-items: center
+		margin-bottom: 35px
+		ul
+			width: 100%
+			max-width: 593px
+			display: flex
+			justify-content: space-between
+			align-items: center
+			li
+				list-style: none
+				position: relative
+				height: auto
+				display: flex
+				justify-content: center
+				align-items: center	
+				a
+					font-size: 14px
+					line-height: 24px
+					color: $menu
+					text-transform: uppercase
+					text-decoration: none
+					+rmin(1200)
+						transition: .3s ease
+						&:hover
+							color: $yellow
+		.social
+			width: 220px
+			display: flex
+			justify-content: space-around
+			align-items: center
+			.link
+				+rmin(1200)
+					&:hover
+						.icon
+							transform: scale(1.1)
+				.icon
+					width: 40px
+					height: 40px
+					display: block
+					background-size: 40px
+					background-position: center center
+					background-repeat: no-repeat
+					transition: .3s ease
+					&.facebook
+						background-image: url('../img/icons/facebook.svg')
+					&.houzz
+						background-image: url('../img/icons/houzz.svg')
+					&.twitter
+						background-image: url('../img/icons/twitter.svg')
+					&.instagram
+						background-image: url('../img/icons/instagram.svg')
+	.footer_copy
+		text-align: right
+		font-size: 14px
+		line-height: 36px
+		color: #b5b5b5
