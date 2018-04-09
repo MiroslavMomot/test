@@ -58,6 +58,7 @@ body
 		font-weight: 400
 
 .modal
+	visibility: hidden
 	position: fixed
 	width: 100%
 	height: 100vh
@@ -66,8 +67,7 @@ body
 	left: 0
 	display: flex
 	justify-content: center
-	align-items: center
-	visibility: hidden
+	align-items: center	
 	&.active
 		visibility: visible
 		.close_overlay
@@ -111,6 +111,8 @@ body
 			width: 370px
 			height: 510px
 			background: url('../img/popup_bg.jpg') no-repeat center center / cover
+			+r(767)
+				display: none
 		.form_wrapper
 			background: white
 			padding: 70px
@@ -123,12 +125,22 @@ body
 					color: $black
 					font-weight: 500
 					margin-bottom: 50px
+				.error_text
+					color: red
+					font-size: 12px
+					margin-bottom: 25px
+					opacity: 0
+					&.active
+						opacity: 1
+				
+					
 				input
 					width: 100%
 					padding: 5px 0
 					border: none
 					border-bottom: 1px solid #aeaeae
-					margin-bottom: 25px
+					&.invalid
+						border-bottom: 1px solid red
 					&:focus
 						outline: none
 						&::placeholder
@@ -179,6 +191,9 @@ header
 	display: flex
 	align-items: center
 	padding: 0 50px
+	+r(1023)
+		padding: 0 10px
+		height: 78px
 	nav
 		width: 100%
 		display: flex
@@ -195,15 +210,57 @@ header
 				background-position: center center
 				background-repeat: no-repeat
 				background-image: url('../img/logo.svg')
+		.burger
+			width: 25px
+			height: 25px
+			display: flex
+			flex-direction: column
+			justify-content: space-around
+			transition: .3s ease
+			&.active
+				transform: rotate(-45deg)
+				span
+					&:nth-child(1)
+						opacity: 0
+					&:nth-child(2)
+						transform: rotate(-90deg)
+					&:nth-child(3)
+						transform: translateY(-8.33px)
+			+rmin(1023)
+				display: none
+			span
+				display: block
+				width: 100%
+				height: 1px
+				background: $menu
+				transition: .3s ease
 		.menu
 			width: 680px
 			display: flex
 			align-items: center
+			+r(1023)
+				visibility: hidden
+				position: fixed
+				top: 78px
+				height: calc(100vh - 78px)
+				width: 100%
+				left: 0
+				background: white
+				align-items: flex-start
+				padding: 10px
+				opacity: 0
+				&.active
+					visibility: visible
+					opacity: 1
+				
 			ul
 				width: 100%
 				display: flex
 				justify-content: space-around
 				align-items: center
+				+r(1023)
+					flex-direction: column
+					align-items: flex-start
 				li
 					list-style: none
 					position: relative
@@ -211,6 +268,11 @@ header
 					display: flex
 					justify-content: center
 					align-items: center
+					+r(1023)
+						height: auto
+						margin-bottom: 15px
+						flex-wrap: wrap
+						justify-content: flex-start
 					+rmin(1200)
 							&:hover
 								ul
@@ -249,9 +311,27 @@ header
 						visibility: hidden
 						opacity: 0
 						transition: .3s ease
+						+r(1023)
+							position: static
+							height: 0
+							padding: 0
+							width: 100%
+							transition: 0s ease
+							border-top: none						
+							padding-left: 20px
+						&.open
+							height: auto
+							opacity: 1
+							visibility: visible
+							margin: 10px 0
 						li
 							margin-bottom: 20px
 							height: auto
+							+r(1023)
+								margin-bottom: 10px
+							&.desctop_hidden
+								+rmin(1023)
+									display: none
 							&:last-child
 								margin-bottom: 0
 			.search_trigger
@@ -285,6 +365,7 @@ header
 						&:hover
 							background-image: url('../img/icons/search_yellow.svg')
 			.search_form
+				visibility: hidden
 				position: absolute
 				width: 100%
 				height: 100vh
@@ -295,8 +376,7 @@ header
 				display: flex
 				justify-content: center
 				align-items: center
-				opacity: 0
-				visibility: hidden				
+				opacity: 0								
 				transition: .3s ease
 				&.active
 					opacity: 1
@@ -311,6 +391,8 @@ header
 					opacity: 0
 					transform: translate3d(0,40px,0)
 					transition: 1s ease
+					+r(1023)
+						padding: 10px
 					input[type="submit"]	
 						width: 20px
 						height: 20px
@@ -322,7 +404,7 @@ header
 						background-size: 20px
 						background-position: center center
 						background-repeat: no-repeat
-						cursor: pointer
+						cursor: pointer						
 						+rmin(1200)
 							transition: .3s ease
 							&:hover
@@ -341,6 +423,11 @@ header
 						border-bottom: 1px solid transparent
 						width: 100%
 						transition: .7s ease
+						+r(1023)
+							width: calc(100% - 40px)
+							height: 40px
+							font-size: 16px
+							border-bottom: 1px solid #c2c2c2
 						&:focus
 							outline: none							
 							border-bottom: 1px solid #c2c2c2
@@ -353,6 +440,8 @@ header
 							color: #c2c2c2
 							transition: .7s ease
 							letter-spacing: 1px
+							+r(1023)
+								font-size: 16px
 .content_wrapper
 	position: relative
 	z-index: 1
@@ -403,11 +492,18 @@ header
 				color: white
 				text-transform: uppercase
 				font-weight: 500
+				+r(1023)
+					font-size: 36px
+
 section.info
+	+r(1023)
+		padding: 20px
 	.text
 		p
 			margin: 40px 0
 section.geography
+	+r(1023)
+		padding: 20px
 	.text
 		p
 			margin: 20px 0
@@ -431,6 +527,8 @@ section.geography
 			color: $dark
 			font-size: 16px
 			line-height: 30px
+			+r(1023)
+				font-size: 14px
 		.who
 			font-size: 14px
 			line-height: 24px
@@ -445,9 +543,16 @@ section.geography
 				left: -60px
 				background: $light
 section.list
+	+r(1023)
+		padding: 20px
 	.text
 		p
 			margin: 20px 0
+	.table_wrapper
+		+r(1023)
+			width: 100%
+			position: relative
+			overflow-x: scroll
 	table
 		width: 100%
 		border: 1px solid #f0f0f0
@@ -460,16 +565,22 @@ section.list
 				text-align: left
 				border-bottom: 1px solid #f0f0f0
 				font-weight: 400
+				+r(1023)
+					padding: 5px
 			td
 				padding: 17px
 				font-size: 14px
 				color: $dark
 				text-align: left
 				font-weight: 400
+				+r(1023)
+					padding: 5px
 section.lastest_posts
 	padding: 70px 0
 	margin-top: 70px
 	border-top: 1px solid #f1f1f5
+	+r(1023)
+		padding: 20px
 	.title
 		text-align: center
 	.posts_grid
@@ -478,9 +589,13 @@ section.lastest_posts
 		display: flex
 		justify-content: space-around
 		align-items: center
+		+r(1023)
+			flex-wrap: wrap
 		.item
 			display: flex
 			box-shadow: 0px 0px 5px 1px rgba(17,20,48,0.11)
+			+r(1023)
+				margin-bottom: 25px
 			.thumbnail
 				background-size: cover
 				background-position: center center
@@ -489,6 +604,9 @@ section.lastest_posts
 				height: 185px
 				display: block
 				position: relative
+				+r(1023)
+					width: 150px
+					height: 150px
 				+rmin(1200)
 					&:hover
 						&:before
@@ -523,6 +641,10 @@ section.lastest_posts
 				flex-direction: column
 				justify-content: space-around
 				align-items: flex-start
+				+r(1023)
+					width: 150px
+					height: 150px
+					padding: 10px
 				.cat
 					font-size: 12px
 					line-height: 20px
@@ -533,6 +655,9 @@ section.lastest_posts
 					line-height: 20px
 					font-weight: 400
 					color: $black
+					+r(1023)
+						font-size: 12px
+						line-height: 1.5
 				.link
 					font-size: 12px
 					line-height: 10px
@@ -560,17 +685,27 @@ footer
 	padding: 55px
 	padding-bottom: 25px
 	border-top: 1px solid #f1f1f5
+	+r(1023)
+		display: flex
+		flex-direction: column
+		padding: 10px
 	.footer_nav
 		display: flex
 		justify-content: space-between
 		align-items: center
 		margin-bottom: 35px
+		+r(1023)
+			flex-wrap: wrap
+			margin: 20px auto
 		ul
 			width: 100%
 			max-width: 593px
 			display: flex
 			justify-content: space-between
 			align-items: center
+			+r(767)
+				flex-direction: column
+				margin: 20px 0
 			li
 				list-style: none
 				position: relative
@@ -593,6 +728,8 @@ footer
 			display: flex
 			justify-content: space-around
 			align-items: center
+			+r(1023)
+				margin: 20px auto
 			.link
 				+rmin(1200)
 					&:hover
@@ -619,3 +756,6 @@ footer
 		font-size: 14px
 		line-height: 36px
 		color: #b5b5b5
+		+r(1023)
+			text-align: center
+			line-height: 1.5

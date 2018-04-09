@@ -19,8 +19,9 @@
 				<div class="menu">
 					<ul>
 						<li class="drop">
-							<a href="#">About</a>
+							<a href="#" class="drop_trigger">About</a>
 							<ul>
+								<li class="desctop_hidden"><a href="#">About</a></li>
 								<li><a href="#">Services</a></li>
 								<li><a href="#">Companies</a></li>
 								<li><a href="#">Our team</a></li>
@@ -40,6 +41,11 @@
 							<input type="text" placeholder="Search" required>
 						</form>
 					</div>
+				</div>
+				<div class="burger">
+					<span></span>
+					<span></span>
+					<span></span>
 				</div>
 			</nav>			
 		</header>
@@ -93,6 +99,7 @@
 				<div class="text">
 					<p>While in Russian sources the islands are mentioned for the first time in 1646, the earliest detailed information about them was provided by the explorer Vladimir Atlasov in 1697.</p>
 				</div>
+				<div class="table_wrapper">
 				<table>
 					<tr>
 						<th>Island</th>
@@ -137,6 +144,7 @@
 						<td>0</td>
 					</tr>
 				</table>
+				</div>
 				<div class="text">
 					<p>In the 18th and early 19th centuries, the Kuril Islands were explored by Danila Antsiferov, I. Kozyrevsky, Ivan Yevreinov, Fyodor Luzhin, Martin Shpanberg, Adam Johann von Krusenstern, Vasily Golovnin, and Henry James Snow.</p>
 				</div>
@@ -190,7 +198,7 @@
 					<li><a href="#">Guides</a></li>
 					<li><a href="#">Community</a></li>
 					<li><a href="#">Resources</a></li>
-					<li><a href="#">Contact us</a></li>
+					<li><a href="#" class="modal_trigger" data-modal="contact_us">Contact us</a></li>
 				</ul>
 				<div class="social">
 					<a href="#" target="_blank" class="link"><span class="icon facebook"></span></a>
@@ -210,18 +218,21 @@
 					<form>
 						<div class="form_title">Contact us</div>
 						<div class="form_fill">
-							<input type="text" placeholder="Name">						
+							<input type="text" id="name" placeholder="Name">	
+							<div class="error_text">Укажите Имя</div>					
 						</div>
 						<div class="form_fill">
-							<input type="text" placeholder="Phone">						
+							<input type="text" id="phone" placeholder="Phone">	
+							<div class="error_text">Укажите Телефон</div>					
 						</div>
 						<div class="form_fill">
-							<input type="text" id="email" placeholder="Email">						
+							<input type="text" id="email" placeholder="Email">		
+							<div class="error_text">Укажите E-mail</div>				
 						</div>
 						<div class="form_fill">
 							<textarea rows="3" placeholder="Message"></textarea>						
 						</div>
-						<button type="submit">Send</button>
+						<button type="submit" id="submit" disabled>Send</button>
 					</form>
 				</div>				
 			</div>
